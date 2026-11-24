@@ -72,7 +72,7 @@ p.s{font-size:13.5px;color:var(--muted)}
 .acc .ch{transition:transform .3s}.acc.open .ch{transform:rotate(180deg)}
 
 /* ===== PREVIEW GRID: video trên, tên chủ đề dưới ===== */
-.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:6px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;padding:14px}
 @media(max-width:900px){.pgrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.pgrid{grid-template-columns:1fr}}
 .pv{display:block;text-decoration:none;color:var(--ink);transition:transform .35s cubic-bezier(.16,1,.3,1);cursor:pointer;position:relative;z-index:1}
@@ -93,6 +93,25 @@ p.s{font-size:13.5px;color:var(--muted)}
 .pv .name{margin-top:12px;text-align:center;font-weight:700;font-size:14.5px}
 .pv .name small{display:block;color:var(--muted);font-weight:500;font-size:12px;margin-top:2px}
 
+/* hiệu ứng rê chuột cho mọi ô */
+.card,.kpi,.box,.contact-row,.acc,.stage,.tag,.hero img,.brand img,.step-btns button,.shot,.tc,.chip{transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,border-color .3s,background-color .3s,filter .3s}
+.card,.kpi,.box,.stage,.contact-row{position:relative}
+.kpi,.box,.contact-row{overflow:hidden}
+.card::before,.kpi::before,.box::before,.stage::before,.contact-row::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.55),transparent 65%)}
+[data-theme="dark"] .card::before,[data-theme="dark"] .kpi::before,[data-theme="dark"] .box::before,[data-theme="dark"] .stage::before,[data-theme="dark"] .contact-row::before{background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(184,166,255,.16),transparent 65%)}
+.card:hover::before,.kpi:hover::before,.box:hover::before,.stage:hover::before,.contact-row:hover::before{opacity:1}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(122,99,209,.2);border-color:var(--lilac-d)}
+.kpi:hover{transform:translateY(-5px) scale(1.04);box-shadow:var(--shadow)}
+.box:hover,.contact-row:hover{transform:translateX(4px) scale(1.01)}
+.acc:hover{transform:translateX(4px);border-color:var(--lilac-d)}
+.tag:hover,.chip:hover{transform:scale(1.08)}
+.hero img:hover,.brand img:hover{transform:scale(1.08) rotate(-2deg)}
+.step-btns button:hover{transform:translateY(-3px);border-color:var(--mint-d)}
+.shot:hover img,.tc:hover img{transform:scale(1.06)}
+.shot .im,.tc img{overflow:hidden}.shot img,.tc img{transition:transform .4s}
+.copy:hover{filter:brightness(.95);transform:scale(1.06)}
+.copy{transition:.2s}
+nav.tabs button:hover{background:var(--card)}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
 .filters button{border:0;border-radius:12px;padding:7px 14px;font:600 12.5px 'Be Vietnam Pro';cursor:pointer;background:var(--bg2);color:var(--muted)}
 .filters button.on{background:var(--lilac);color:var(--lilac-d)}
@@ -200,7 +219,7 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:24px 0}
         <div id="skills">
           <div class="acc open"><div class="h"><span style="color:var(--mint-d)">🥇 Skill #1: Auto Video Production (Stacy Studio)</span><span class="ch">⌄</span></div><div class="b"><div>Tự xây hệ thống sản xuất short-form hàng loạt bằng <b>Python, FFmpeg, Gemini API, ElevenLabs, Edge TTS &amp; faster-whisper</b>. Rút ngắn ~70% thời gian dựng, đạt KPI 5+ video/ngày.</div></div></div>
           <div class="acc"><div class="h"><span style="color:var(--sky-d)">🤖 Skill #2: Build AI Agents &amp; Workflow Automation</span><span class="ch">⌄</span></div><div class="b"><div>Thiết kế <b>AI Agents</b> (Claude Code, Gemini API, Prompt Chaining, GenLogin) tự săn trend, viết hook 3s, tạo giọng đọc, tách phụ đề và phân phối đa kênh TikTok/YouTube Shorts.</div></div></div>
-          <div class="acc"><div class="h"><span style="color:var(--peach-d)">⚡ Thực chiến Bet Media (OKVIP 2024–2026)</span><span class="ch">⌄</span></div><div class="b"><div>Vận hành chuỗi kênh <i>Góc Khuất Sân Cỏ, Bóng Đá 1 Phút, Pickleball 60s, Sân Cỏ 360, Nhịp Thở Yoga</i> và chiến dịch <b>SHBET, F1 x Ryan Giggs</b>. Nắm kỹ thuật giữ retention &amp; lồng ghép branding tự nhiên.</div></div></div>
+          <div class="acc"><div class="h"><span style="color:var(--peach-d)">⚡ Kinh nghiệm thực chiến xây kênh ngành Media Bet</span><span class="ch">⌄</span></div><div class="b"><div>Trực tiếp tham gia xây dựng và vận hành <b>nhiều kênh short-form trong cùng một ngày</b> cho ngành Media Bet (OKVIP 2024–2026): lên định vị kênh, kế hoạch nội dung, sản xuất, đăng tải và đọc số liệu để tối ưu. Nắm kỹ thuật giữ retention, lồng ghép branding tự nhiên và làm việc trong khung chính sách nền tảng.</div></div></div>
         </div>
         <button class="btn mint" style="margin-top:14px;width:100%;justify-content:center" onclick="switchTab('showcase')">▶ Xem Reel 5s &amp; Số liệu (~3.97M views) →</button>
       </div>
@@ -247,7 +266,10 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:24px 0}
       <div class="acc open" style="background:var(--card)"><div class="h"><span>Media Executive | Video Editor — OKVIP <span class="tag t-mint">BET MEDIA</span><br><small style="color:var(--muted);font-weight:500">2024 – 2026 · Hệ thống kênh short-form &amp; chiến dịch thương hiệu</small></span><span class="ch">⌄</span></div>
         <div class="b"><div>
           <ul class="l"><li>Dựng video short-form cho <b>YouTube Shorts &amp; TikTok</b> từ footage thô đến bản hoàn chỉnh, tối ưu hành vi người xem.</li>
-          <li>Triển khai chuỗi kênh: <i>OKVIP Góc Khuất Sân Cỏ, Bóng Đá 1 Phút, Pickleball 60s, Xứ Sở Beauty, Mẹo Khỏe Mỗi Ngày, OK9 Nhịp Thở Yoga, Sân Cỏ 360</i>.</li>
+          <li>Xây dựng và vận hành <b>nhiều kênh song song trong ngày</b>: nghiên cứu ngách, lên lịch nội dung, sản xuất, đăng tải đúng khung giờ vàng.</li>
+          <li>Theo dõi YouTube Studio / TikTok Analytics (retention, CTR, lượng xem theo nguồn) để thử nghiệm hook, thumbnail, tiêu đề và nhân rộng format thắng.</li>
+          <li>Phối hợp brief với team Content, Performance và quản lý kênh; bàn giao file chuẩn, đúng deadline cho nhịp đăng liên tục.</li>
+          <li>Nắm quy tắc nội dung nhạy cảm của ngành Bet: tiết chế thông điệp, safe zone hiển thị, tránh vi phạm chính sách quảng cáo và bản quyền.</li>
           <li>Sản xuất video chiến dịch <b>SHBET</b> và <b>F1 x Ryan Giggs</b>.</li></ul>
           <div class="box" style="background:var(--mint);color:var(--mint-d)"><b>THÀNH TÍCH:</b> 5+ video/ngày · Shorts đạt 500K – 1.5M views · AI rút ngắn ~70% thời gian sản xuất.</div>
         </div></div></div>
@@ -255,7 +277,7 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:24px 0}
         <div class="b"><div><ul class="l"><li>Xây pipeline <b>Auto Video Studio</b> tích hợp Python, Gemini API, Claude Code, ElevenLabs, Edge TTS, faster-whisper &amp; FFmpeg: viết kịch bản, lồng tiếng, tách phụ đề, xuất video hàng loạt.</li>
         <li>Thiết kế <b>AI Agents</b> phân tích insight, tạo hook 3s và vận hành nhiều tài khoản qua GenLogin.</li></ul></div></div></div>
       <div class="acc"><div class="h"><span>Video Editor &amp; Content Creator — KING MEDIA &amp; E-Commerce<br><small style="color:var(--muted);font-weight:500">Entertainment, Media, F&amp;B (Chè Hẻ 45 đơn/chiều) &amp; TikTok Shop</small></span><span class="ch">⌄</span></div>
-        <div class="b"><div><ul class="l"><li>Dựng series giải trí viral <i>Kể Phim</i> (Split-screen Reaction) và <i>Sâu Bích Zone</i> (Live-caption &amp; Motion Graphic).</li>
+        <div class="b"><div><ul class="l"><li>Dựng các series giải trí viral với kỹ thuật Split-screen Reaction, Live-caption và Motion Graphic.</li>
         <li>Video storytelling F&amp;B đạt <b>45 đơn hàng/buổi chiều</b>, vận hành livestream bán hàng TikTok Shop.</li></ul></div></div></div>
     </div>
   </div>
@@ -314,9 +336,9 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:24px 0}
   <p><b>#1 Auto Video Production (Stacy Studio):</b> Python, FFmpeg, Gemini API, ElevenLabs, Edge TTS, faster-whisper.<br><b>#2 Build AI Agents &amp; Automation:</b> Claude Code, Gemini API, GenLogin — tự động hóa trend, hook 3s, đa kênh.<br><b>#3 Short-form Editing:</b> CapCut Pro, Split-screen, Kinetic Subtitle, Sound Design/SFX.</p>
   <h2>2. Kinh nghiệm làm việc</h2>
   <div class="row"><span>Media Executive | Video Editor — OKVIP (Bet Media)</span><span>2024 – 2026</span></div>
-  <ul><li>Dựng short-form cho YouTube Shorts &amp; TikTok (Góc Khuất Sân Cỏ, Bóng Đá 1 Phút, Pickleball 60s, Sân Cỏ 360, Nhịp Thở Yoga…), chiến dịch SHBET, F1 x Ryan Giggs.</li><li>5+ video/ngày; nhiều Shorts đạt 500K – 1.5M views, gấp 7.3 lần trung bình kênh.</li></ul>
+  <ul><li>Xây dựng và vận hành nhiều kênh short-form song song trong ngày cho ngành Media Bet: nghiên cứu ngách, lịch nội dung, sản xuất, đăng tải, đọc số liệu để tối ưu; chiến dịch SHBET, F1 x Ryan Giggs.</li><li>Theo dõi retention/CTR để thử nghiệm hook, thumbnail, tiêu đề; làm việc trong khung chính sách nền tảng và bản quyền.</li><li>5+ video/ngày; nhiều Shorts đạt 500K – 1.5M views, gấp 7.3 lần trung bình kênh.</li></ul>
   <div class="row" style="margin-top:8px"><span>Video Editor &amp; Content Creator — KING MEDIA &amp; E-Commerce</span><span>2024 – 2026</span></div>
-  <ul><li>Trọn gói Research → Script → AI Asset/Voice → Editing cho Kể Phim, Sâu Bích Zone; viral F&amp;B đạt 45 đơn/buổi chiều.</li></ul>
+  <ul><li>Trọn gói Research → Script → AI Asset/Voice → Editing cho các series giải trí; viral F&amp;B đạt 45 đơn/buổi chiều.</li></ul>
 </div>
 
 <script>
@@ -409,12 +431,12 @@ FOLDERS.forEach(f=>{
 
 /* ---------- Kỹ thuật dựng + số liệu ---------- */
 const TECH=[
- {img:'assets/tech-bds.jpg',f:'Chủ đề Bất động sản',t:'POV Walk-through',d:'Môi giới đi dọc căn nhà, dòng chữ "POV: Bạn là môi giới BĐS" dẫn người xem như đang đi xem nhà thật.'},
- {img:'assets/tech-trader.jpg',f:'Chủ đề Trader',t:'Bản tin Infographic',d:'Tiêu đề bùng nổ kiểu truyện tranh cùng các lớp dữ liệu vàng, BTC, ETH và biểu đồ như một bản tin tài chính.'},
- {img:'assets/tech-ai.jpg',f:'Stacy Studio (Video AI)',t:'Cảnh AI điện ảnh + Kinetic Title',d:'Hình ảnh AI dựng bối cảnh lịch sử, tiêu đề động nổi bật giữa khung, phối giọng đọc và nhạc tự động.'},
- {img:'assets/tech-reup.jpg',f:'Nhóm Kênh Reup',t:'Khung template + Lyric Sub',d:'Đặt footage vào khung thương hiệu (ngôi sao, banner trên/dưới), phụ đề lyric neon bám theo nhịp.'},
- {img:'assets/tech-che.jpg',f:'Chè Hẻ',t:'Macro cận cảnh + Sticker chú thích',d:'Quay cận topping, chèn sticker và mũi tên chỉ dẫn, tạo cảm giác dễ thương, dễ chốt đơn.'},
- {img:'assets/tech-hoa.jpg',f:'Hoa Tươi Ngọc Trâm',t:'Quy trình từng bước + Chữ nhấn từ khóa',d:'Quay quá trình gói hoa theo từng bước, phụ đề đổi màu từ khóa để giữ chú ý đến thành phẩm.'}
+ {img:'assets/tech-bds.jpg',f:'Chủ đề Bất động sản',t:'VFX Light-streak Transition + HUD Title Card',d:'Chuyển cảnh bằng hiệu ứng vệt sáng (light-streak), callout vị trí dạng sticker, mở đầu bằng title card HUD để nhấn mạnh điểm bán.'},
+ {img:'assets/tech-trader.jpg',f:'Chủ đề Trader',t:'Motion Graphics Infographic + Data Overlay',d:'Tiêu đề pop-art kèm lớp dữ liệu (vàng, BTC, ETH), biểu đồ chuyển động và lower third theo phong cách bản tin tài chính.'},
+ {img:'assets/tech-ai.jpg',f:'Stacy Studio (Video AI)',t:'AI Generative Visuals + Kinetic Typography',d:'Hình ảnh sinh bằng AI phối cinematic color grading, chữ chuyển động (kinetic typography) đồng bộ voice-over và nhạc nền.'},
+ {img:'assets/tech-reup.jpg',f:'Nhóm Kênh Reup',t:'Branded Template Frame + Karaoke Caption',d:'Đưa footage vào khung nhận diện (letterbox, banner trên/dưới), phụ đề karaoke bám nhịp để giữ retention.'},
+ {img:'assets/tech-che.jpg',f:'Chè Hẻ',t:'Macro Close-up + Sticker & Callout Annotation',d:'Cận cảnh macro làm nổi bật topping, bổ sung sticker và mũi tên callout hướng mắt người xem đến sản phẩm.'},
+ {img:'assets/tech-hoa.jpg',f:'Hoa Tươi Ngọc Trâm',t:'Step-by-step Process Cut + Keyword Highlight Caption',d:'Dựng quy trình theo từng bước (process cut), phụ đề nhấn từ khóa đổi màu (highlight caption) dẫn đến thành phẩm cuối.'}
 ];
 const techEl=document.getElementById('tech');
 TECH.forEach(x=>{const d=document.createElement('div');d.className='tc';
@@ -443,6 +465,8 @@ function openLb(src,cap){lbImg.src=src;lbCap.textContent=cap||'';lb.classList.ad
 function closeLb(){lb.classList.remove('on')}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
 document.querySelectorAll('.hero img').forEach(i=>i.style.cursor='zoom-in');
+/* đèn rọi theo con trỏ */
+document.addEventListener('mousemove',e=>{const el=e.target.closest&&e.target.closest('.card,.kpi,.box,.stage,.contact-row');if(!el)return;const r=el.getBoundingClientRect();el.style.setProperty('--mx',(e.clientX-r.left)+'px');el.style.setProperty('--my',(e.clientY-r.top)+'px')});
 
 /* ---------- Workflow 8 bước ---------- */
 const STEPS=[
