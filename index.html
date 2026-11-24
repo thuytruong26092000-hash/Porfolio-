@@ -77,7 +77,7 @@ p.s{font-size:13.5px;color:var(--muted)}
 @media(max-width:560px){.pgrid{grid-template-columns:1fr}}
 .pv{display:block;text-decoration:none;color:var(--ink);transition:transform .35s cubic-bezier(.16,1,.3,1);cursor:pointer;position:relative;z-index:1}
 .pv:hover,.pv:focus-visible{transform:scale(1.06);z-index:5;outline:none}
-.pv .vbox{position:relative;aspect-ratio:16/10;border-radius:22px;overflow:hidden;background:var(--lilac);border:3px solid var(--card);box-shadow:var(--shadow);transition:box-shadow .35s}
+.pv .vbox{position:relative;aspect-ratio:4/5;border-radius:22px;overflow:hidden;background:var(--lilac);border:3px solid var(--card);box-shadow:var(--shadow);transition:box-shadow .35s}
 .pv:hover .vbox{box-shadow:0 18px 40px rgba(122,99,209,.28)}
 .pv video,.pv .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .pv .poster{display:flex;align-items:center;justify-content:center;font-size:54px}
@@ -104,6 +104,13 @@ p.s{font-size:13.5px;color:var(--muted)}
 .shot img{width:100%;height:100%;object-fit:contain}
 .shot.frame img{object-fit:cover}
 .shot .cap{padding:9px 12px;font-size:12px;font-weight:700}
+.tech{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.tech{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.tech{grid-template-columns:1fr}}
+.tc{display:flex;gap:12px;border:1px solid var(--line);border-radius:18px;padding:10px;background:var(--bg2);cursor:zoom-in;transition:.25s}
+.tc:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.tc img{width:92px;aspect-ratio:3/4;object-fit:cover;border-radius:12px;flex:none}
+.tc b{font-size:13.5px;display:block}.tc small{color:var(--muted);font-size:12px;display:block;margin-top:3px}
 .step-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
 @media(min-width:1000px){.step-btns{grid-template-columns:repeat(8,1fr)}}
 .step-btns button{border:1px solid var(--line);background:var(--bg2);border-radius:14px;padding:10px;text-align:left;cursor:pointer;font:700 12px 'Be Vietnam Pro';color:var(--ink);transition:.2s}
@@ -213,12 +220,14 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:24px 0}
   </div>
 
   <div class="card" style="margin-top:14px">
-    <h2>Kỹ thuật dựng &amp; Số liệu YouTube Studio</h2>
-    <div class="filters" id="filters">
-      <button class="on" data-f="all">Tất cả (11)</button>
-      <button data-f="frame">Kỹ thuật dựng (3)</button>
-      <button data-f="stat">Số liệu (8)</button>
-    </div>
+    <h2>Kỹ thuật dựng nổi bật theo từng thư mục</h2>
+    <p class="s" style="margin:4px 0 14px">Mỗi thư mục chọn 1 kỹ thuật tiêu biểu, lấy từ chính video mẫu trong folder. Bấm để phóng to.</p>
+    <div class="tech" id="tech"></div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Số liệu YouTube Studio</h2>
+    <p class="s" style="margin:4px 0 14px">8 video tiêu biểu, tổng ~3.97M views · +2,124 subs. Bấm ảnh để phóng to.</p>
     <div class="shots" id="shots"></div>
   </div>
 </section>
@@ -320,22 +329,22 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:24px 0}
 const FOLDERS = [
   { key:'bds',    emoji:'🏢', title:'Chủ đề Bất động sản', sub:'Thư mục mẫu BĐS',
     url:'https://drive.google.com/drive/folders/17rSNoWIgbramldgrRfXwulEmz4hQZV2V?usp=sharing',
-    video:'videos/bat-dong-san.mp4', poster:'', color:'var(--lilac)' },
+    video:'videos/bat-dong-san.mp4', poster:'assets/tech-bds.jpg', color:'var(--lilac)' },
   { key:'trader', emoji:'📈', title:'Chủ đề Trader', sub:'Thư mục mẫu Trader',
     url:'https://drive.google.com/drive/folders/1Q20-EJ-Z8FyOogCkZ9mVD8SCts_staBJ?usp=sharing',
-    video:'videos/trader.mp4', poster:'', color:'var(--sky)' },
+    video:'videos/trader.mp4', poster:'assets/tech-trader.jpg', color:'var(--sky)' },
   { key:'ai',     emoji:'🤖', title:'Stacy Studio (Video AI)', sub:'Folder Video AI',
     url:'https://drive.google.com/drive/folders/1gIlvCDBUXfA2yWDefiklm8FN1UJb-DpD?usp=sharing',
-    video:'videos/stacy-studio.mp4', poster:'assets/sau-bich-1.jpg', color:'var(--mint)' },
+    video:'videos/stacy-studio.mp4', poster:'assets/tech-ai.jpg', color:'var(--mint)' },
   { key:'reup',   emoji:'🎬', title:'Nhóm Kênh Reup', sub:'Folder Video Reup',
     url:'https://drive.google.com/drive/folders/1qUra31g1VGZ-4xzvo2hvcMKqgeFTfPTS?usp=sharing',
-    video:'videos/reup.mp4', poster:'assets/ke-phim.jpg', color:'var(--peach)' },
+    video:'videos/reup.mp4', poster:'assets/tech-reup.jpg', color:'var(--peach)' },
   { key:'che',    emoji:'🍧', title:'Chè Hẻ', sub:'Folder Chè Hẻ Media',
     url:'https://drive.google.com/drive/folders/1ya1KBEqRGAOQzBrGOPjXIjlQpsU0mYuP?usp=sharing',
-    video:'videos/che-he.mp4', poster:'', color:'var(--pink)' },
+    video:'videos/che-he.mp4', poster:'assets/tech-che.jpg', color:'var(--pink)' },
   { key:'hoa',    emoji:'💐', title:'Hoa Tươi Ngọc Trâm', sub:'Folder Hoa Tươi Ngọc Trâm',
     url:'https://drive.google.com/drive/folders/1V75Aw3If6JOkzzSVsc4JK3B6k9oghOtk?usp=sharing',
-    video:'videos/hoa-tuoi-ngoc-tram.mp4', poster:'', color:'var(--lemon)' }
+    video:'videos/hoa-tuoi-ngoc-tram.mp4', poster:'assets/tech-hoa.jpg', color:'var(--lemon)' }
 ];
 const PREVIEW_SECONDS = 5;
 
@@ -398,11 +407,21 @@ FOLDERS.forEach(f=>{
   a.addEventListener('focus',start); a.addEventListener('blur',stop);
 });
 
-/* ---------- Ảnh kỹ thuật & số liệu ---------- */
+/* ---------- Kỹ thuật dựng + số liệu ---------- */
+const TECH=[
+ {img:'assets/tech-bds.jpg',f:'Chủ đề Bất động sản',t:'POV Walk-through',d:'Môi giới đi dọc căn nhà, dòng chữ "POV: Bạn là môi giới BĐS" dẫn người xem như đang đi xem nhà thật.'},
+ {img:'assets/tech-trader.jpg',f:'Chủ đề Trader',t:'Bản tin Infographic',d:'Tiêu đề bùng nổ kiểu truyện tranh cùng các lớp dữ liệu vàng, BTC, ETH và biểu đồ như một bản tin tài chính.'},
+ {img:'assets/tech-ai.jpg',f:'Stacy Studio (Video AI)',t:'Cảnh AI điện ảnh + Kinetic Title',d:'Hình ảnh AI dựng bối cảnh lịch sử, tiêu đề động nổi bật giữa khung, phối giọng đọc và nhạc tự động.'},
+ {img:'assets/tech-reup.jpg',f:'Nhóm Kênh Reup',t:'Khung template + Lyric Sub',d:'Đặt footage vào khung thương hiệu (ngôi sao, banner trên/dưới), phụ đề lyric neon bám theo nhịp.'},
+ {img:'assets/tech-che.jpg',f:'Chè Hẻ',t:'Macro cận cảnh + Sticker chú thích',d:'Quay cận topping, chèn sticker và mũi tên chỉ dẫn, tạo cảm giác dễ thương, dễ chốt đơn.'},
+ {img:'assets/tech-hoa.jpg',f:'Hoa Tươi Ngọc Trâm',t:'Quy trình từng bước + Chữ nhấn từ khóa',d:'Quay quá trình gói hoa theo từng bước, phụ đề đổi màu từ khóa để giữ chú ý đến thành phẩm.'}
+];
+const techEl=document.getElementById('tech');
+TECH.forEach(x=>{const d=document.createElement('div');d.className='tc';
+  d.innerHTML=`<img loading="lazy" src="${x.img}" alt="${x.t}"><div><span class="tag t-pink">${x.f}</span><b style="margin-top:6px">${x.t}</b><small>${x.d}</small></div>`;
+  d.onclick=()=>openLb(x.img,x.f+' — '+x.t);techEl.appendChild(d)});
+
 const SHOTS=[
- {t:'frame',src:'assets/ke-phim.jpg',cap:'"Kể Phim" — Split-screen Reaction',lb:'Series Kể Phim — Split-Screen Reaction & Kinetic Title'},
- {t:'frame',src:'assets/sau-bich-1.jpg',cap:'"Sâu Bích Zone" — Sticker & Motion',lb:'Sâu Bích Zone — Motion Graphic & Sticker'},
- {t:'frame',src:'assets/sau-bich-2.jpg',cap:'"Sâu Bích Zone" — Live-Caption',lb:'Sâu Bích Zone — Live-Caption bám lời thoại'},
  {t:'stat',src:'assets/stat-1500k.jpg',cap:'1,500,000 views · +926 subs',lb:'YouTube Studio: 1,500,000 Views • +926 Subs'},
  {t:'stat',src:'assets/stat-1145k.jpg',cap:'1,145,238 views · +730 subs',lb:'YouTube Studio: 1,145,238 Views • +730 Subs'},
  {t:'stat',src:'assets/stat-528k.jpg',cap:'528,500 views · +186 subs',lb:'YouTube Studio: 528,500 Views • +186 Subs'},
@@ -414,13 +433,9 @@ const SHOTS=[
 ];
 const shots=document.getElementById('shots');
 SHOTS.forEach(s=>{
-  const d=document.createElement('div'); d.className='shot '+(s.t==='frame'?'frame':''); d.dataset.t=s.t;
+  const d=document.createElement('div'); d.className='shot'; d.dataset.t=s.t;
   d.innerHTML=`<div class="im"><img loading="lazy" src="${s.src}" alt="${s.cap}"></div><div class="cap">${s.cap}</div>`;
   d.onclick=()=>openLb(s.src,s.lb); shots.appendChild(d);
-});
-document.querySelectorAll('#filters button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===b));
-  shots.querySelectorAll('.shot').forEach(s=>s.style.display=(b.dataset.f==='all'||s.dataset.t===b.dataset.f)?'':'none');
 });
 
 /* ---------- Lightbox ---------- */
